@@ -1,11 +1,3 @@
-/**
- * CardIOMain.java
- * card.io phonegap plugin
- * @Copyright 2013 Cubet Technologies http://www.cubettechnologies.com
- * @author Robin <robin@cubettech.com>
- * @Since 28 June, 2013
- */
-
 package com.alignace.cordova.plugin.cardio;
 
 import org.json.JSONArray;
@@ -37,7 +29,7 @@ public class CardIOMain extends Activity {
 				CardIOPlugin.confirm);
 		scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY,
 				CardIOPlugin.suppressManual);
-		scanIntent.putExtra(CardIOActivity.EXTRA_USE_CARDIO_LOGO,
+		scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO,
 				CardIOPlugin.hideLogo);
 
 		startActivityForResult(scanIntent, MY_SCAN_REQUEST_CODE);
