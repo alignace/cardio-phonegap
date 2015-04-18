@@ -7,11 +7,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
 public class CardIOPlugin extends CordovaPlugin {
 
 	public static final String TAG = "CardIOPlugin";
 	public static final String SCAN = "scan";
-	
+
 	CallbackContext callbackContext;
 
 	public static JSONArray mCreditcardNumber = null;
@@ -31,17 +35,17 @@ public class CardIOPlugin extends CordovaPlugin {
 			CallbackContext callbackContext) {
 		boolean result = false;
 		this.callbackContext = callbackContext;
-		
+
 		Log.v(TAG, "execute: action=" + action);
 
 		if (SCAN.equals(action)) {
 
-			Log.v(TAG, "execute: data=" + args.toString());
+			Log.v(TAG, "execute: data=" + data.toString());
 
 			try {
 				// set configurations
-				JSONObject config = args.getJSONObject(0);
-				
+				JSONObject config = data.getJSONObject(0);
+
 				expiry = config.getBoolean("expiry");
 				cvv = config.getBoolean("cvv");
 				zip = config.getBoolean("zip");
