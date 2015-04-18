@@ -19,7 +19,7 @@
 
 	<platform name="android">
 
-		<lib-file src="src/android/libs/card.io-5.0.0.jar" arch="device" />
+		<lib-file src="src/android/libs/card-io.jar" arch="device" />
 		<lib-file src="src/android/libs/arm64-v8a" arch="device" />
 		<lib-file src="src/android/libs/armeabi" arch="device" />
 		<lib-file src="src/android/libs/armeabi-v7a" arch="device" />
