@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android" id="com.alignace.cordova.plugin.cardio"
+	version="1.0.0">
+
+	<name>CardIOPlugin</name>
+	<description>Cordova plugin for card.io</description>
+	<keywords>card.io, credit card</keywords>
+	<author>Ayajahmed Shaikh</author>
+	<license>MIT</license>
+
+	<engines>
+		<engine name="cordova" version=">=3.0.0" />
+	</engines>
+
+	<js-module src="www/CardIOPlugin.js" name="CardIOPlugin">
+		<clobbers target="CardIOPlugin" />
+	</js-module>
+
+	<platform name="android">
+
+		<lib-file src="android/libs/card.io-5.0.0.jar" arch="device" />
+		<lib-file src="android/libs/arm64-v8a" arch="device" />
+		<lib-file src="android/libs/armeabi" arch="device" />
+		<lib-file src="android/libs/armeabi-v7a" arch="device" />
+		<lib-file src="android/libs/mips" arch="device" />
+		<lib-file src="android/libs/mips64" arch="device" />
+		<lib-file src="android/libs/x86" arch="device" />
+		<lib-file src="android/libs/x86_64" arch="device" />
+
+		<source-file
+			src="src/android/src/com/alignace/cordova/plugin/cardio/CardIOPlugin.java"
+			target-dir="src/com/alignace/cordova/plugin/cardio" />
+		<source-file
+			src="src/android/src/com/alignace/cordova/plugin/cardio/CardIOMain.java"
+			target-dir="src/com/alignace/cordova/plugin/cardio" />
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="CardIOPlugin">
+				<param name="android-package" value="com.alignace.cordova.plugin.cardio.CardIOPlugin" />
+			</feature>
+		</config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<activity android:configChanges="orientation|keyboardHidden"
+				android:name="com.alignace.cordova.plugin.cardio.CardIOMain"
+				android:screenOrientation="landscape"
+				android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+				android:windowSoftInputMode="stateAlwaysHidden">
+				<intent-filter>
+					<action android:name="com.alignace.cordova.plugin.cardio.SCAN" />
+					<category android:name="android.intent.category.DEFAULT" />
+				</intent-filter>
+			</activity>
+			<activity android:name="io.card.payment.CardIOActivity"
+				android:configChanges="keyboardHidden|orientation" />
+			<activity android:name="io.card.payment.DataEntryActivity" />
+
+			<uses-permission android:name="android.permission.VIBRATE" />
+			<uses-permission android:name="android.permission.CAMERA" />
+			<uses-feature android:name="android.hardware.camera.autofocus" />
+			<uses-feature android:name="android.hardware.camera.flash" />
+		</config-file>
+
+	</platform>
+
+</plugin>
