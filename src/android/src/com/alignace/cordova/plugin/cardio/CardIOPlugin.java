@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -25,10 +24,6 @@ public class CardIOPlugin extends CordovaPlugin {
 	public static Boolean confirm;
 	public static Boolean hideLogo;
 	public static Boolean suppressManual;
-
-	private Context getApplicationContext() {
-		return this.cordova.getActivity().getApplicationContext();
-	}
 
 	@Override
 	public boolean execute(String action, JSONArray data,
@@ -78,10 +73,11 @@ public class CardIOPlugin extends CordovaPlugin {
 		// send plugin result if success
 		JSONArray mImagepath = mCreditcardNumber;
 		if (mImagepath != null) {
-			PluginResult cardData = new PluginResult(PluginResult.Status.OK,
-					mCreditcardNumber);
-			cardData.setKeepCallback(false);
-			callbackContext.sendPluginResult(cardData);
+//			PluginResult cardData = new PluginResult(PluginResult.Status.OK,
+//					mCreditcardNumber);
+//			cardData.setKeepCallback(false);
+			callbackContext.success(mCreditcardNumber);
+//			callbackContext.sendPluginResult(cardData);
 			mCreditcardNumber = null;
 		} else {
 			PluginResult cardData = new PluginResult(

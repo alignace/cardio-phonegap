@@ -63,5 +63,26 @@
 		</config-file>
 
 	</platform>
+	
+	<platform name="ios">
+        <framework src="libc++.dylib" />
+        
+        <config-file target="config.xml" parent="/*">
+            <feature name="CardIOPlugin">
+                <param name="ios-package" value="CardIOPlugin"/>
+            </feature>
+        </config-file>
+        
+        <header-file src="src/ios/CardIOViewDelegate.h" />
+        <header-file src="src/ios/CardIO.h" />
+        <header-file src="src/ios/CardIOCreditCardInfo.h" />
+        <header-file src="src/ios/CardIOPaymentViewController.h" />
+        <header-file src="src/ios/CardIOPaymentViewControllerDelegate.h" />
+        <header-file src="src/ios/CardIOPlugin.h" />
+        <header-file src="src/ios/CardIOView.h" />
+        <source-file src="src/ios/CardIOPlugin.m" compiler-flags="-fmodules" />
+        <source-file src="src/ios/libs/libCardIO.a" compiler-flags="-fmodules" />
+        
+    </platform>
 
 </plugin>
