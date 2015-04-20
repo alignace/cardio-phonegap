@@ -59,20 +59,18 @@
 }
 
 - (void)canScan:(CDVInvokedUrlCommand *)command {
-    BOOL canScan = [CardIOPaymentViewController canReadCardWithCamera];
-    [self sendSuccessTo:command.callbackId withObject:[NSNumber numberWithBool:canScan]];
+    [self sendSuccessTo:command.callbackId withObject:[NSNumber numberWithBool:TRUE]];
 }
 
 - (void)version:(CDVInvokedUrlCommand *)command {
-    NSString *version = [CardIOPaymentViewController libraryVersion];
-    
+   // NSString *version = [CardIOPaymentViewController version];
+    NSString *version = @"1.0.0";
     if(version) {
         [self sendSuccessTo:command.callbackId withObject:version];
     } else {
         [self sendFailureTo:command.callbackId];
     }
 }
-
 
 #pragma mark - CardIOPaymentViewControllerDelegate methods
 
