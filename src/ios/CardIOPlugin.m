@@ -24,10 +24,10 @@
 - (void)scan:(CDVInvokedUrlCommand *)command {
     self.scanCallbackId = command.callbackId;
     NSDictionary* options = [command.arguments objectAtIndex:0];
-    NSString *appToken = options[@"apiKey"];
+    //NSString *appToken = options[@"apiKey"];
     
     self.paymentViewController = [[CardIOPaymentViewController alloc] initWithPaymentDelegate:self];
-    self.paymentViewController.appToken = appToken;
+    //self.paymentViewController.appToken = appToken;
     
     NSNumber *collectCVV = [options objectForKey:@"cvv"];
     if(collectCVV) {
@@ -41,7 +41,12 @@
     
     NSNumber *collectExpiry = [options objectForKey:@"expiry"];
     if(collectExpiry) {
-        self.paymentViewController.collectExpiry = [collectExpiry boolValue];
+        self.paymentViewController.scanExpiry = [collectExpiry boolValue];
+    }
+    
+    NSNumber *collectHideLogo = [options objectForKey:@"hideLogo"];
+    if(collectHideLogo) {
+        self.paymentViewController.hideCardIOLogo = [collectHideLogo boolValue];
     }
     
     NSNumber *disableManualEntryButtons = [options objectForKey:@"supressManual"];
@@ -55,7 +60,7 @@
         self.paymentViewController.languageOrLocale = languageOrLocale;
     }
     
-    [self.viewController presentModalViewController:self.paymentViewController animated:YES];
+    [self.viewController presentViewController:self.paymentViewController animated:YES completion:nil];
 }
 
 - (void)canScan:(CDVInvokedUrlCommand *)command {
@@ -80,7 +85,7 @@
         return;
     }
     
-    [self.paymentViewController dismissModalViewControllerAnimated:YES];
+    [self.paymentViewController dismissViewControllerAnimated:YES completion:nil];
     
     // Convert CardIOCreditCardInfo into dictionary for passing back to javascript
     NSMutableDictionary *response = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -113,7 +118,7 @@
         return;
     }
     
-    [self.paymentViewController dismissModalViewControllerAnimated:YES];
+    [self.paymentViewController dismissViewControllerAnimated:YES completion:nil];
     
     [self sendFailureTo:self.scanCallbackId];
     
